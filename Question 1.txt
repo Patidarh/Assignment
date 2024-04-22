@@ -1,0 +1,26 @@
+Implement a function that checks whether a given string is a palindrome or not.
+
+
+fn is_palindrome(s: &str) -> bool {
+    let cleaned_str: String = s.chars().filter(|c| c.is_alphanumeric()).map(|c| c.to_lowercase().to_string()).collect();
+    let reversed_str: String = cleaned_str.chars().rev().collect();
+    cleaned_str == reversed_str
+}
+
+fn main() {
+    let test_cases = vec![
+        "A man, a plan, a canal, Panama!",
+        "Was it a car or a cat I saw?",
+        "No 'x' in Nixon",
+        "Rust",
+    ];
+
+    for test_case in test_cases {
+        println!(
+            "\"{}\" is{} a palindrome.",
+            test_case,
+            if is_palindrome(test_case) { "" } else { " not" }
+        );
+    }
+}
+

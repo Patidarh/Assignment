@@ -1,0 +1,31 @@
+Implement a function that finds the longest common prefix of a given set of strings.
+
+
+fn longest_common_prefix(strs: &[String]) -> String {
+    if strs.is_empty() {
+        return String::new();
+    }
+
+    // Find the shortest string in the set
+    let shortest_str = strs.iter().min_by_key(|s| s.len()).unwrap();
+
+    for (i, &byte) in shortest_str.as_bytes().iter().enumerate() {
+        for other_str in strs.iter() {
+            if other_str.as_bytes()[i] != byte {
+                return shortest_str[..i].to_string();
+            }
+        }
+    }
+
+    shortest_str.to_string()
+}
+
+fn main() {
+    let input_strings = vec![
+        "flower".to_string(),
+        "flow".to_string(),
+        "flight".to_string(),
+    ];
+
+    println!("Longest common prefix: {}", longest_common_prefix(&input_strings));
+}
